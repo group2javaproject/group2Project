@@ -13,16 +13,22 @@ public class Methods {
     public static HashMap<String,String> admin = new HashMap<>();
     /**
      * Below are variables for attendance system.
-     * 1st number in arraylist is ID.
-     * 2nd number is assigned class.
-     * 3rd number reflects total number of missed days.
-     * 4th number reflects number of missed excused days(only for students)
-     * 5th number reflects number of missed unexcused days(only for students)
+     * 1st number in arraylist is ID.(0)
+     * 2nd number is assigned class.(1)
+     * 3rd number reflects total number of missed days.(2)
+     * 4th number reflects number of missed excused days(only for students) (3)
+     * 5th number reflects number of missed unexcused days(only for students)(4)
      */
     public static ArrayList <Integer> teacher1 = new ArrayList<>();
     public static ArrayList <Integer> teacher2 = new ArrayList<>();
     public static ArrayList <Integer> teacher3 = new ArrayList<>();
-    public static ArrayList <Integer> student1 = new ArrayList<>();
+    public static ArrayList <Integer> studentIds = new ArrayList<>();
+    public static ArrayList <Integer> studentClass= new ArrayList<>();
+    public static ArrayList <Integer> studentMissedDays = new ArrayList<>();
+    public static ArrayList <Integer> studentExcused= new ArrayList<>();
+    public static ArrayList <Integer> studentUnexcused = new ArrayList<>();
+
+    /**
     public static ArrayList <Integer> student2 = new ArrayList<>();
     public static ArrayList <Integer> student3 = new ArrayList<>();
     public static ArrayList <Integer> student4 = new ArrayList<>();
@@ -52,6 +58,34 @@ public class Methods {
     public static ArrayList <Integer> student28 = new ArrayList<>();
     public static ArrayList <Integer> student29 = new ArrayList<>();
     public static ArrayList <Integer> student30 = new ArrayList<>();
+    */
+
+
+    public static int searchStudent() {
+        System.out.println("Please enter student ID");
+        int typeId = scan.nextInt();
+        int index = -1;
+        for (int i=0;i<studentIds.size();i++){
+            if (typeId==(studentIds.get(i))){
+                index = i;
+                break;
+            }
+            else {
+                System.out.println("Student not found");
+            }
+
+            }
+        return index;
+        }
+
+    public static void viewAttendance(){
+        System.out.println(
+                "\n Present days " + (180 - studentMissedDays.get(searchStudent())) +
+                "\n Missed days " + studentMissedDays.get(searchStudent()) +
+                "\n Excused missed days " + studentExcused.get(searchStudent()) +
+                "\n UnExcused missed days " + studentUnexcused.get(searchStudent()));
+
+    }
 
 
 
@@ -76,7 +110,7 @@ public class Methods {
             System.out.println("Please enter your password");
             String typePassword = scan.nextLine();
 
-            if (studentAccounts.containsKey(typeID) && studentAccounts.containsValue(typePassword)) {
+            if (studentAccounts.containsKey(typeID) && studentAccounts.get(typeID).equals(typePassword)) {
                 System.out.println("Welcome Student");
 
                 System.out.println("Please choose option from menu below" +
@@ -84,7 +118,7 @@ public class Methods {
                         "\n" + "2s." + "Contact teacher");
                 initiate();
                 break;
-            }else if (teacherAccounts.containsKey(typeID) && teacherAccounts.containsValue(typePassword)) {
+            }else if (teacherAccounts.containsKey(typeID) && teacherAccounts.get(typeID).equals(typePassword)) {
                 System.out.println("Welcome Teacher");
                 //method that will show message from the student
                 //method that will notify if teacher has too many absences (Shawan)
@@ -96,7 +130,7 @@ public class Methods {
                         "\n" + "5t." + "Contact Admin");
                 initiate();
                 break;
-            }else if (admin.containsKey(typeID) && admin.containsValue(typePassword)) {
+            }else if (admin.containsKey(typeID) && admin.get(typeID).equals(typePassword)) {
                 //method that will show message from the student
                 //method that will notify if teacher has too many absences
                 System.out.println("Please choose option from menu below" +
@@ -124,7 +158,7 @@ public class Methods {
         menuChoice = scan.nextLine();
         switch (menuChoice){
             case "1s":
-               // Attendance();
+               viewAttendance();
                 break;
             case "2s":
                // presentMethod
@@ -212,8 +246,12 @@ public class Methods {
 
 
     public static void main(String[] args) {
-    admin.put("58274","Alex1234");
+    admin.put("Alex","Alex1234");
     teacher1.add(1); teacher1.add(1); teacher1.add(5);
+    studentAccounts.put("Shawan","Shawan1234"); studentIds.add(1); studentClass.add(1); studentMissedDays.add(9);studentUnexcused.add(3);studentExcused.add(6);
+    studentAccounts.put("David","David1234"); studentIds.add(2); studentClass.add(1); studentMissedDays.add(7);studentUnexcused.add(3);studentExcused.add(4);
+        System.out.println(studentIds);
+
 
 
 
