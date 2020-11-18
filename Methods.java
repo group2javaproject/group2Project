@@ -7,6 +7,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Methods {
+    public static String ID;
     static Scanner scan = new Scanner(System.in);
     public static HashMap<String,String> studentAccounts = new HashMap<>();
     public static HashMap<String,String> teacherAccounts = new HashMap<>();
@@ -15,68 +16,36 @@ public class Methods {
      * Below are variables for attendance system.
      * 1st number in arraylist is ID.(0)
      * 2nd number is assigned class.(1)
-     * 3rd number reflects total number of missed days.(2)
-     * 4th number reflects number of missed excused days(only for students) (3)
-     * 5th number reflects number of missed unexcused days(only for students)(4)
+     * 3rd number is number of missed days
      */
     public static ArrayList <Integer> teacher1 = new ArrayList<>();
     public static ArrayList <Integer> teacher2 = new ArrayList<>();
     public static ArrayList <Integer> teacher3 = new ArrayList<>();
-    public static ArrayList <Integer> studentIds = new ArrayList<>();
+
+
+    public static ArrayList <String> studentIds = new ArrayList<>();
     public static ArrayList <Integer> studentClass= new ArrayList<>();
     public static ArrayList <Integer> studentMissedDays = new ArrayList<>();
     public static ArrayList <Integer> studentExcused= new ArrayList<>();
     public static ArrayList <Integer> studentUnexcused = new ArrayList<>();
 
-    /**
-    public static ArrayList <Integer> student2 = new ArrayList<>();
-    public static ArrayList <Integer> student3 = new ArrayList<>();
-    public static ArrayList <Integer> student4 = new ArrayList<>();
-    public static ArrayList <Integer> student5 = new ArrayList<>();
-    public static ArrayList <Integer> student6 = new ArrayList<>();
-    public static ArrayList <Integer> student7 = new ArrayList<>();
-    public static ArrayList <Integer> student8 = new ArrayList<>();
-    public static ArrayList <Integer> student9 = new ArrayList<>();
-    public static ArrayList <Integer> student10 = new ArrayList<>();
-    public static ArrayList <Integer> student11 = new ArrayList<>();
-    public static ArrayList <Integer> student12 = new ArrayList<>();
-    public static ArrayList <Integer> student13 = new ArrayList<>();
-    public static ArrayList <Integer> student14 = new ArrayList<>();
-    public static ArrayList <Integer> student15 = new ArrayList<>();
-    public static ArrayList <Integer> student16 = new ArrayList<>();
-    public static ArrayList <Integer> student17 = new ArrayList<>();
-    public static ArrayList <Integer> student18 = new ArrayList<>();
-    public static ArrayList <Integer> student19 = new ArrayList<>();
-    public static ArrayList <Integer> student20 = new ArrayList<>();
-    public static ArrayList <Integer> student21 = new ArrayList<>();
-    public static ArrayList <Integer> student22 = new ArrayList<>();
-    public static ArrayList <Integer> student23 = new ArrayList<>();
-    public static ArrayList <Integer> student24 = new ArrayList<>();
-    public static ArrayList <Integer> student25 = new ArrayList<>();
-    public static ArrayList <Integer> student26 = new ArrayList<>();
-    public static ArrayList <Integer> student27 = new ArrayList<>();
-    public static ArrayList <Integer> student28 = new ArrayList<>();
-    public static ArrayList <Integer> student29 = new ArrayList<>();
-    public static ArrayList <Integer> student30 = new ArrayList<>();
-    */
+
 
 
     public static int searchStudent() {
-        System.out.println("Please enter student ID");
-        int typeId = scan.nextInt();
+
         int index = -1;
         for (int i=0;i<studentIds.size();i++){
-            if (typeId==(studentIds.get(i))){
+            if (ID.equals(studentIds.get(i))){
                 index = i;
                 break;
             }
-            else {
-                System.out.println("Student not found");
-            }
+
 
             }
         return index;
-        }
+
+    }
 
     public static void viewAttendance(){
         System.out.println(
@@ -87,20 +56,27 @@ public class Methods {
 
     }
 
+    public static void markStudentAttendance(){
+        System.out.println("Please enter student ID");
+        ID = scan.nextLine();
+        int index = searchStudent();
+        System.out.println("Is this student present today?");
+        String answer1 = scan.nextLine();
+        if (answer1.equalsIgnoreCase("no")){
+            System.out.println("Is it excused absence?");
+            String answer2 = scan.nextLine();
+            if(answer2.equalsIgnoreCase("excused")){
+                studentMissedDays.set(searchStudent(),studentMissedDays.get(searchStudent())+1);
+                studentExcused.set(searchStudent(),studentExcused.get(searchStudent())+1);
+            }else if (answer2.equalsIgnoreCase("unexcused")){
+                studentMissedDays.set(searchStudent(),studentMissedDays.get(searchStudent())+1);
+                studentUnexcused.set(searchStudent(),studentUnexcused.get(searchStudent())+1);
+            }
+        }
 
-
-    /**
-     *
-
-    public void notify (){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Please enter your message");
-        String message = scan.nextLine();
-        System.out.println("Please enter number of days you are planning to miss");
-        int numOfDays = scan.nextInt();
 
     }
-     */
+
 
     public static void start (){
 
@@ -116,6 +92,7 @@ public class Methods {
                 System.out.println("Please choose option from menu below" +
                         "\n" + "1s." + "View attendance" +
                         "\n" + "2s." + "Contact teacher");
+                ID = typeID;
                 initiate();
                 break;
             }else if (teacherAccounts.containsKey(typeID) && teacherAccounts.get(typeID).equals(typePassword)) {
@@ -128,6 +105,7 @@ public class Methods {
                         "\n" + "3t." + "Take student attendance" +
                         "\n" + "4t." + "Take your own attendance" +
                         "\n" + "5t." + "Contact Admin");
+                ID = typeID;
                 initiate();
                 break;
             }else if (admin.containsKey(typeID) && admin.get(typeID).equals(typePassword)) {
@@ -170,7 +148,7 @@ public class Methods {
                 // removeStudent();
                 break;
             case "3t":
-                // studentAttendance();
+                 markStudentAttendance();
                 break;
             case "4t":
                 // Method to Take your own attendance (Shawan)
@@ -247,10 +225,11 @@ public class Methods {
 
     public static void main(String[] args) {
     admin.put("Alex","Alex1234");
+    teacherAccounts.put("John","John1234");
     teacher1.add(1); teacher1.add(1); teacher1.add(5);
-    studentAccounts.put("Shawan","Shawan1234"); studentIds.add(1); studentClass.add(1); studentMissedDays.add(9);studentUnexcused.add(3);studentExcused.add(6);
-    studentAccounts.put("David","David1234"); studentIds.add(2); studentClass.add(1); studentMissedDays.add(7);studentUnexcused.add(3);studentExcused.add(4);
-        System.out.println(studentIds);
+    studentAccounts.put("Shawan","Shawan1234"); studentIds.add("Shawan"); studentClass.add(1); studentMissedDays.add(9);studentUnexcused.add(3);studentExcused.add(6);
+    studentAccounts.put("David","David1234"); studentIds.add("David"); studentClass.add(1); studentMissedDays.add(7);studentUnexcused.add(3);studentExcused.add(4);
+    System.out.println(studentIds);
 
 
 
