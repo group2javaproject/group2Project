@@ -1,0 +1,54 @@
+package Group2JavaProject;
+
+import java.util.InputMismatchException;
+
+public class AttendanceSystem {
+    public static void main(String[] args) {
+        Methods a1 = new Methods();
+
+        a1.admin.put("Alex","Alex1234");
+        a1.teacherAccounts.put("John","John1234"); a1.teacherId.add("John"); a1.teacherClass.add(1); a1.teacherMissedDays.add(9);
+        a1.teacherAccounts.put("Will","Will1234"); a1.teacherId.add("Will"); a1.teacherClass.add(2); a1.teacherMissedDays.add(45);
+
+        a1.studentAccounts.put("Shawan","Shawan1234"); a1.studentIds.add("Shawan"); a1.studentClass.add(1); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
+        a1.studentAccounts.put("David","David1234"); a1.studentIds.add("David"); a1.studentClass.add(2); a1.studentMissedDays.add(7.0);a1.studentUnexcused.add(3);a1.studentExcused.add(4);
+        a1.studentAccounts.put("Michael","Michael1234"); a1.studentIds.add("Michael"); a1.studentClass.add(3); a1.studentMissedDays.add(30.0);a1.studentUnexcused.add(3);a1.studentExcused.add(27);
+        a1.studentAccounts.put("1","David1234"); a1.studentIds.add("1"); a1.studentClass.add(2); a1.studentMissedDays.add(0.0);a1.studentUnexcused.add(0);a1.studentExcused.add(0);
+        a1.studentAccounts.put("2","Shawan1234"); a1.studentIds.add("2"); a1.studentClass.add(3); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
+        a1.studentAccounts.put("3","David1234"); a1.studentIds.add("3"); a1.studentClass.add(1); a1.studentMissedDays.add(4.0);a1.studentUnexcused.add(0);a1.studentExcused.add(4);
+        a1.studentAccounts.put("4","Shawan1234"); a1.studentIds.add("5"); a1.studentClass.add(2); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
+        a1.studentAccounts.put("6","David1234"); a1.studentIds.add("6"); a1.studentClass.add(3); a1.studentMissedDays.add(7.0);a1.studentUnexcused.add(3);a1.studentExcused.add(4);
+        a1.studentAccounts.put("7","Shawan1234"); a1.studentIds.add("7"); a1.studentClass.add(1); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
+        a1.studentAccounts.put("8","David1234"); a1.studentIds.add("8"); a1.studentClass.add(2); a1.studentMissedDays.add(7.0);a1.studentUnexcused.add(3);a1.studentExcused.add(4);
+        a1.studentAccounts.put("9","Shawan1234"); a1.studentIds.add("9"); a1.studentClass.add(3); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
+        a1.studentAccounts.put("10","David1234"); a1.studentIds.add("10"); a1.studentClass.add(1); a1.studentMissedDays.add(10.0);a1.studentUnexcused.add(3);a1.studentExcused.add(7);
+        a1.studentAccounts.put("11","David1234"); a1.studentIds.add("11"); a1.studentClass.add(2); a1.studentMissedDays.add(7.0);a1.studentUnexcused.add(3);a1.studentExcused.add(4);
+        a1.studentAccounts.put("12","Shawan1234"); a1.studentIds.add("12"); a1.studentClass.add(3); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
+
+        ASCIIArtGenerator artGen = new ASCIIArtGenerator();
+        try {
+            artGen.printTextArt("Welcome to Attendance system!",ASCIIArtGenerator.ART_SIZE_MEDIUM);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            a1.start();
+        }catch (InputMismatchException e){
+            System.out.println("Invalid input");
+        }
+
+
+        try {
+            artGen.printTextArt("Thank you! Goodbye!",ASCIIArtGenerator.ART_SIZE_MEDIUM);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+
+
+}
