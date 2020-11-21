@@ -16,24 +16,25 @@ public class Methods {
     public static HashMap<String,String> admin = new HashMap<>(); // variable that stores Login and password for Admin/Admins
     /**
      Specific index in arraylists below assigned to particular teacher/student.
-     I.e. Student 1 will have information stored only in index 0 in arraylists: studentIds studentClass studentMissedDays studentExcused studentUnexcused.
+     I.e. Student 1 will have information stored only in index 0 in all student arraylists.
      Student 2 will have information at index 1 and etc.
      */
     public static ArrayList <String> teacherId = new ArrayList<>();
     public static ArrayList <Integer> teacherClass = new ArrayList<>();
     public static ArrayList <Integer> teacherMissedDays = new ArrayList<>();
+    public static ArrayList <Integer> teacherClassSize = new ArrayList<>();
 
 
     public static ArrayList <String> studentIds = new ArrayList<>();
     public static ArrayList <Integer> studentClass= new ArrayList<>();
-    public static ArrayList <Integer> studentMissedDays = new ArrayList<>();
+    public static ArrayList <Double> studentMissedDays = new ArrayList<>();
     public static ArrayList <Integer> studentExcused= new ArrayList<>();
     public static ArrayList <Integer> studentUnexcused = new ArrayList<>();
 
 
 
 
-    public static int searchStudent() {
+    public  int searchStudent() {
 
         int index = -1;
         for (int i=0;i<studentIds.size();i++){
@@ -44,7 +45,7 @@ public class Methods {
         }
         return index;
     }
-    public static int searchTeacher() {
+    public  int searchTeacher() {
 
         int index = -1;
         for (int i=0;i<teacherId.size();i++){
@@ -56,7 +57,19 @@ public class Methods {
         return index;
     }
 
-    public static void viewAttendance(){
+    public  void reLogin(){
+        System.out.println("Thank you for using our Attendance system");
+        System.out.println("Do you want to login as a different user?");
+        String answer = scan.nextLine();
+
+        if (answer.equalsIgnoreCase("yes")){
+            start();
+        }
+
+    }
+
+
+    public void viewAttendance(){
         System.out.println(
                 "\n Present days " + (180 - studentMissedDays.get(searchStudent())) +
                 "\n Missed days " + studentMissedDays.get(searchStudent()) + studentExcused.get(searchStudent()) + " of them are excused and " + studentUnexcused.get(searchStudent()) + "unexcused" +
@@ -67,7 +80,7 @@ public class Methods {
             studentMenu();
         }
     }
-    public static void notifyTeacher (){
+    public void notifyTeacher (){
         System.out.println("Please enter the message to the teacher and number of days you are planning to miss.");
         String message = scan.nextLine();
         studentNotifications.put(ID,message);
@@ -78,27 +91,83 @@ public class Methods {
             studentMenu();
     }
 
-    public static void markStudentAttendance(){
+    public void defineClassSize (){
+        System.out.println("Please define number of students in your class");
+        int num = scan.nextInt();
+        if (num>0 && num<10) {
+            teacherClassSize.set(searchTeacher(), num);
+        }else{
+            System.out.println("You should have between 0 and 10 students in your class");
+        }
+        System.out.println("Maximum number of students in your class is " + teacherClassSize.get(searchTeacher()));
+        System.out.println("Go back to the main menu?");
+        String answer = scan.nextLine();
+        if (answer.equalsIgnoreCase("yes"))
+            teacherMenu();
+    }
+    public void removeStudentT (){
+        String teacherID = ID;
+        int indexT = searchTeacher();
         System.out.println("Please enter student ID");
         ID = scan.nextLine();
-        int index = searchStudent();
-        System.out.println("Is this student present today?");
-        String answer1 = scan.nextLine();
-        if (answer1.equalsIgnoreCase("no")){
-            System.out.println("Is it excused absence?");
-            String answer2 = scan.nextLine();
-            if(answer2.equalsIgnoreCase("excused")){
-                studentMissedDays.set(searchStudent(),studentMissedDays.get(searchStudent())+1);
-                studentExcused.set(searchStudent(),studentExcused.get(searchStudent())+1);
-            }else if (answer2.equalsIgnoreCase("unexcused")){
-                studentMissedDays.set(searchStudent(),studentMissedDays.get(searchStudent())+1);
-                studentUnexcused.set(searchStudent(),studentUnexcused.get(searchStudent())+1);
-            }
+        int indexS = searchStudent();
+        if (studentClass.get(indexS)==teacherClass.get(indexT)) {
+            studentClass.set(indexS,0);
+            System.out.println("Student has been removed from your class");
+
+        }else{
+            System.out.println("You can't remove student from another teacher class");
         }
-
-
+        ID = teacherID;
+        System.out.println("Go back to the main menu?");
+        String answer = scan.nextLine();
+        if (answer.equalsIgnoreCase("yes"))
+            teacherMenu();
     }
-    public static void notifyAdmin (){
+
+    public void markStudentAttendance(){
+        String teacherID = ID;
+        int indexT = searchTeacher();
+        System.out.println("Please enter student ID");
+        ID = scan.nextLine();
+        int indexS = searchStudent();
+        if (studentClass.get(indexS)==teacherClass.get(indexT)) {
+            System.out.println("Is this student present today?");
+            String answer1 = scan.nextLine();
+            if (answer1.equalsIgnoreCase("no")) {
+                System.out.println("Is it excused absence?");
+                String answer2 = scan.nextLine();
+                if (answer2.equalsIgnoreCase("excused")) {
+                    studentMissedDays.set(indexS, studentMissedDays.get(indexS) + 1);
+                    studentExcused.set(indexS, studentExcused.get(indexS) + 1);
+                } else if (answer2.equalsIgnoreCase("unexcused")) {
+                    studentMissedDays.set(indexS, studentMissedDays.get(indexS) + 1);
+                    studentUnexcused.set(indexS, studentUnexcused.get(indexS) + 1);
+                }
+            }
+        }else{
+            System.out.println("You can't take student attendance from another class");
+        }
+        ID = teacherID;
+        System.out.println("Go back to the main menu?");
+        String answer = scan.nextLine();
+        if (answer.equalsIgnoreCase("yes"))
+            teacherMenu();
+    }
+    public void takeAttendanceT (){
+        System.out.println("Are you planning to work today?");
+        String answer = scan.nextLine();
+        if (answer.equalsIgnoreCase("no")){
+            teacherMissedDays.set(searchTeacher(),teacherMissedDays.get(searchTeacher())+1);
+        }else{
+            System.out.println("Enjoy your work");
+        }
+        System.out.println("Go back to the main menu?");
+        String answer1 = scan.nextLine();
+        if (answer1.equalsIgnoreCase("yes"))
+            teacherMenu();
+    }
+    public void notifyAdmin (){
         System.out.println("Please enter the message to the Admin and number of days you are planning to miss.");
         String message = scan.nextLine();
         teacherNotifications.put(ID,message);
@@ -110,7 +179,7 @@ public class Methods {
     }
 
 
-    public static void start (){
+    public void start (){
 
         for(int i=0; i<4; i++) {
             System.out.println("Please enter your ID");
@@ -121,26 +190,25 @@ public class Methods {
             if (studentAccounts.containsKey(typeID) && studentAccounts.get(typeID).equals(typePassword)) {
                 ID = typeID;
                 if (studentMissedDays.get(searchStudent())>20){
-                    System.out.println("You missed too many lessons, please speak to your teacher");
+                    System.out.println("ATTENTION! You missed too many lessons, please speak to your teacher");
                 }
                 studentMenu();
                 break;
             }else if (teacherAccounts.containsKey(typeID) && teacherAccounts.get(typeID).equals(typePassword)) {
-                System.out.println("below are notifications from the students" +
-                        studentNotifications);
+                System.out.println("!You have notifications from the students" +
+                        "\n" + studentNotifications);
                 studentNotifications.clear();
 
-                //method that will notify if teacher has too many absences (Shawan)
                 ID = typeID;
+                if (teacherMissedDays.get(searchTeacher())>20){
+                    System.out.println("ATTENTION! You missed too many lessons, please speak to your Supervisor");
+                }
                 teacherMenu();
-
-                initiate();
                 break;
             }else if (admin.containsKey(typeID) && admin.get(typeID).equals(typePassword)) {
-                System.out.println("below are notifications from the teachers" +
-                        teacherNotifications);
+                System.out.println("!You have notifications from the teachers" +
+                                "\n" + teacherNotifications);
                 teacherNotifications.clear();
-
                 adminMenu();
                 break;
 
@@ -150,105 +218,131 @@ public class Methods {
         }
     }
 
-    public static void studentMenu () {
+    public  void studentMenu () {
         System.out.println("Welcome Student " + ID);
 
         System.out.println("Please choose option from menu below" +
-                "\n" + "1s." + "View attendance" +
-                "\n" + "2s." + "Contact teacher");
+                "\n" + "1." + "View attendance" +
+                "\n" + "2." + "Contact teacher" +
+                "\n" + "3." + "Log out");
 
-        initiate();
+        initiateStudent();
 
     }
-    public static void teacherMenu () {
+    public  void teacherMenu () {
         System.out.println("Welcome teacher " + ID);
 
         System.out.println("Please choose option from menu below" +
-                "\n" + "1t." + "Change max number of students in your class" +
-                "\n" + "2t." + "remove student from the Class" +
-                "\n" + "3t." + "Take student attendance" +
-                "\n" + "4t." + "Take your own attendance" +
-                "\n" + "5t." + "Contact Admin");
+                "\n" + "1." + "Change max number of students in your class" +
+                "\n" + "2." + "Remove student from the Class" +
+                "\n" + "3." + "Take student attendance" +
+                "\n" + "4." + "Take your own attendance" +
+                "\n" + "5." + "Contact Admin" +
+                "\n" + "6." + "Log out");
 
-        initiate();
+        initiateTeacher();
 
     }
-    public static void adminMenu () {
+    public  void adminMenu () {
         System.out.println("Welcome Master");
 
         System.out.println("Please choose option from menu below" +
-                "\n" + "1a." + "Show individual student attendance report and show percentage of days present" +
-                "\n" + "2a." + "Show individual teacher attendance report and show percentage of days present" +
-                "\n" + "3a." + "Show report of class attendance as a whole and show percentage of days present" +
-                "\n" + "4a." + "Show report of all teacher attendance as a whole and show percentage of days present" +
-                "\n" + "5a." + "Add new teacher" +
-                "\n" + "6a." + "Remove a teacher" +
-                "\n" + "7a." + "Add student" +
-                "\n" + "8a." + "Remove student" +
-                "\n" + "9a." + "Transfer student from one class to another");
-
-        initiate();
+                "\n" + "1." + "Show individual student attendance report and show percentage of days present" +
+                "\n" + "2." + "Show individual teacher attendance report and show percentage of days present" +
+                "\n" + "3." + "Show report of class attendance as a whole and show percentage of days present" +
+                "\n" + "4." + "Show report of all teacher attendance as a whole and show percentage of days present" +
+                "\n" + "5." + "Add new teacher" +
+                "\n" + "6." + "Remove a teacher" +
+                "\n" + "7." + "Add student" +
+                "\n" + "8." + "Remove student" +
+                "\n" + "9." + "Transfer student from one class to another" +
+                "\n" + "10." + "Log out");
+        initiateAdmin();
 
     }
 
-    public static void initiate (){
+    public  void initiateAdmin (){
         String menuChoice = "";
         menuChoice = scan.nextLine();
         switch (menuChoice){
-            case "1s":
-               viewAttendance();
-                break;
-            case "2s":
-               notifyTeacher();
-                break;
-            case "1t":
-                // numOfStudents();// Uses sizeOfClass
-                break;
-            case "2t":
-                // removeStudent();
-                break;
-            case "3t":
-                 markStudentAttendance();
-                break;
-            case "4t":
-                // Method to Take your own attendance (Shawan)
-                break;
-            case "5t":
-                notifyAdmin();
-                break;
-            case "1a":
+            case "1":
                 studentInd();
                 break;
-            case "2a":
+            case "2":
                 teacherInd();
-
                 break;
-            case "3a":
-                // Method to Show report of class attendance as a whole and show percentage of days present
+            case "3":
+                classAttendance();
                 break;
-            case "4a":
-                // Method to Show report of all teacher attendance as a whole and show percentage of days present
+            case "4":
+                teacherAttendance();
                 break;
-            case "5a":
+            case "5":
                 addTeacher();
                 break;
-            case "6a":
+            case "6":
                 removeTeacher();
                 break;
-            case "7a":
+            case "7":
                 addStudents();
                 break;
-            case "8a":
+            case "8":
                 removeStudent();
                 break;
-            case "9a":
+            case "9":
                 studentTransfer();
+                break;
+            case "10":
+                reLogin();
+                break;
+        }
+    }
+
+    public  void initiateStudent (){
+        String menuChoice = "";
+        menuChoice = scan.nextLine();
+        switch (menuChoice){
+            case "1":
+                viewAttendance();
+                break;
+            case "2":
+                notifyTeacher();
+                break;
+            case "3":
+                reLogin();
+                break;
+
+        }
+
+    }
+
+    public  void initiateTeacher (){
+        String menuChoice = "";
+        menuChoice = scan.nextLine();
+        switch (menuChoice){
+            case "1":
+                defineClassSize();
+                break;
+            case "2":
+                removeStudentT();
+                break;
+            case "3":
+                markStudentAttendance();
+                break;
+            case "4":
+                takeAttendanceT();
+                break;
+            case "5":
+                notifyAdmin();
+                break;
+            case "6":
+                reLogin();
                 break;
         }
 
     }
 
-    public static void addStudents (){
+    public  void addStudents (){
         System.out.println("Please create a login for a new student");
         String login = scan.nextLine();
         System.out.println("Please create a password for a new student");
@@ -256,13 +350,13 @@ public class Methods {
         System.out.println("Please assign class for a new student");
         Integer cClass = scan.nextInt();
         studentAccounts.put(login,password);
-        studentIds.add(login); studentClass.add(cClass); studentMissedDays.add(0);studentExcused.add(0);studentUnexcused.add(0);
+        studentIds.add(login); studentClass.add(cClass); studentMissedDays.add(0.0);studentExcused.add(0);studentUnexcused.add(0);
         System.out.println("Go back to the main menu?");
         String answer = scan.nextLine();
         if (answer.equalsIgnoreCase("yes")) {
             adminMenu(); }
     }
-    public static void studentTransfer (){
+    public  void studentTransfer (){
         System.out.println("Please enter ID of the student you want to transfer");
         ID = scan.nextLine();
         System.out.println("Please enter new class for the student");
@@ -273,7 +367,7 @@ public class Methods {
         if (answer.equalsIgnoreCase("yes")) {
             adminMenu(); }
     }
-    public static void removeStudent(){
+    public  void removeStudent(){
         System.out.println("Please enter ID of the student you want to remove from the system.");
         ID = scan.nextLine();
         if (studentAccounts.containsKey(ID)){
@@ -287,7 +381,7 @@ public class Methods {
         if (answer.equalsIgnoreCase("yes")) {
             adminMenu(); }
     }
-    public static void addTeacher (){
+    public  void addTeacher (){
         System.out.println("Please create a login for a new teacher");
         String login = scan.nextLine();
         System.out.println("Please create a password for a new teacher");
@@ -295,18 +389,18 @@ public class Methods {
         System.out.println("Please assign class for the new teacher");
         Integer tClass = scan.nextInt();
         teacherAccounts.put(login,password);
-        teacherId.add(login); teacherClass.add(tClass);teacherMissedDays.add(0);
+        teacherId.add(login); teacherClass.add(tClass);teacherMissedDays.add(0);teacherClassSize.add(0);
         System.out.println("Go back to the main menu?");
         String answer = scan.nextLine();
         if (answer.equalsIgnoreCase("yes")) {
             adminMenu(); }
 
     }
-    public static void removeTeacher(){
+    public  void removeTeacher(){
         System.out.println("Please enter ID of the teacher you want to remove from the system.");
         ID = scan.nextLine();
         if (teacherAccounts.containsKey(ID)){
-            teacherId.remove(searchTeacher()); teacherMissedDays.remove(searchTeacher());teacherClass.remove(searchTeacher());
+            teacherId.remove(searchTeacher()); teacherMissedDays.remove(searchTeacher());teacherClass.remove(searchTeacher());teacherClassSize.remove(searchTeacher());
             teacherAccounts.remove(ID);
         }else {
             System.out.println("Teacher not found");
@@ -316,7 +410,7 @@ public class Methods {
         if (answer.equalsIgnoreCase("yes")) {
             adminMenu(); }
     }
-    public static void teacherInd() {
+    public  void teacherInd() {
         System.out.println("Enter teacher's ID");
         String typeID = scan.nextLine();
         ID = typeID;
@@ -330,7 +424,7 @@ public class Methods {
             adminMenu();
         }
     }
-    public static void studentInd () {
+    public  void studentInd () {
         System.out.println("Enter student's ID");
         String typeID = scan.nextLine();
         ID = typeID;
@@ -345,25 +439,39 @@ public class Methods {
         }
     }
 
+    public  Double classAttendance (){
+        ArrayList<Double> classMissedDays = new ArrayList();
+        System.out.println("Which class would you like to view attendance on? ");
+        int classObject = scan.nextInt();
+        for (int j=0;j<studentClass.size();j++) {
+            if (classObject == (studentClass.get(j))) {
+                classMissedDays.add(studentMissedDays.get(j));
+            }
+        }
+        double sum = 0;
+            for (int i = 0 ; i < classMissedDays.size() ; i++){
+                sum += classMissedDays.get(i);
+            }
+            Double percentageOfDays = 100 * sum/180;
+            System.out.println("Percentage of days Present for class " +classObject +percentageOfDays + " %");
 
-
-
-    public static void main(String[] args) {
-    admin.put("Alex","Alex1234");
-    teacherAccounts.put("John","John1234"); teacherId.add("John"); teacherClass.add(1); teacherMissedDays.add(9);
-
-    studentAccounts.put("Shawan","Shawan1234"); studentIds.add("Shawan"); studentClass.add(1); studentMissedDays.add(9);studentUnexcused.add(3);studentExcused.add(6);
-    studentAccounts.put("David","David1234"); studentIds.add("David"); studentClass.add(1); studentMissedDays.add(7);studentUnexcused.add(3);studentExcused.add(4);
-    System.out.println(studentIds);
-
-
-
-
-    start();
-
-
-
+        return sum;
     }
+    public  Double teacherAttendance (){
+
+        double sum = 0;
+        for (int i = 0 ; i < teacherMissedDays.size() ; i++){
+            sum += teacherMissedDays.get(i);
+        }
+        Double percentageOfDays = 100 * sum/180;
+        System.out.println("Percentage of days Present for teachers are : " +percentageOfDays + " %");
+
+        return sum;
+    }
+
+
+
+
 
 
 
