@@ -6,41 +6,45 @@ public class AttendanceSystem {
     public static void main(String[] args) {
         Methods a1 = new Methods();
 
-        a1.admin.put("Alex","Alex1234");
-        a1.teacherAccounts.put("John","John1234"); a1.teacherId.add("John"); a1.teacherClass.add(1); a1.teacherMissedDays.add(9);
-        a1.teacherAccounts.put("Will","Will1234"); a1.teacherId.add("Will"); a1.teacherClass.add(2); a1.teacherMissedDays.add(45);
+        a1.admin.put(356000,"Alex1234");
+        a1.teacherAccounts.put(356001,"John1234"); a1.teacherId.add(356001); a1.teacherClass.add(1); a1.teacherMissedDays.add(9.0); a1.teacherClassSize.add(0);
+        a1.teacherAccounts.put(356002,"Will1234"); a1.teacherId.add(356002); a1.teacherClass.add(2); a1.teacherMissedDays.add(45.0);a1.teacherClassSize.add(0);
 
-        a1.studentAccounts.put("Shawan","Shawan1234"); a1.studentIds.add("Shawan"); a1.studentClass.add(1); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
-        a1.studentAccounts.put("David","David1234"); a1.studentIds.add("David"); a1.studentClass.add(2); a1.studentMissedDays.add(7.0);a1.studentUnexcused.add(3);a1.studentExcused.add(4);
-        a1.studentAccounts.put("Michael","Michael1234"); a1.studentIds.add("Michael"); a1.studentClass.add(3); a1.studentMissedDays.add(30.0);a1.studentUnexcused.add(3);a1.studentExcused.add(27);
-        a1.studentAccounts.put("1","David1234"); a1.studentIds.add("1"); a1.studentClass.add(2); a1.studentMissedDays.add(0.0);a1.studentUnexcused.add(0);a1.studentExcused.add(0);
-        a1.studentAccounts.put("2","Shawan1234"); a1.studentIds.add("2"); a1.studentClass.add(3); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
-        a1.studentAccounts.put("3","David1234"); a1.studentIds.add("3"); a1.studentClass.add(1); a1.studentMissedDays.add(4.0);a1.studentUnexcused.add(0);a1.studentExcused.add(4);
-        a1.studentAccounts.put("4","Shawan1234"); a1.studentIds.add("5"); a1.studentClass.add(2); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
-        a1.studentAccounts.put("6","David1234"); a1.studentIds.add("6"); a1.studentClass.add(3); a1.studentMissedDays.add(7.0);a1.studentUnexcused.add(3);a1.studentExcused.add(4);
-        a1.studentAccounts.put("7","Shawan1234"); a1.studentIds.add("7"); a1.studentClass.add(1); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
-        a1.studentAccounts.put("8","David1234"); a1.studentIds.add("8"); a1.studentClass.add(2); a1.studentMissedDays.add(7.0);a1.studentUnexcused.add(3);a1.studentExcused.add(4);
-        a1.studentAccounts.put("9","Shawan1234"); a1.studentIds.add("9"); a1.studentClass.add(3); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
-        a1.studentAccounts.put("10","David1234"); a1.studentIds.add("10"); a1.studentClass.add(1); a1.studentMissedDays.add(10.0);a1.studentUnexcused.add(3);a1.studentExcused.add(7);
-        a1.studentAccounts.put("11","David1234"); a1.studentIds.add("11"); a1.studentClass.add(2); a1.studentMissedDays.add(7.0);a1.studentUnexcused.add(3);a1.studentExcused.add(4);
-        a1.studentAccounts.put("12","Shawan1234"); a1.studentIds.add("12"); a1.studentClass.add(3); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
+        a1.studentAccounts.put(356003,"Shawan1234"); a1.studentIds.add(356003); a1.studentClass.add(1); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
+        a1.studentAccounts.put(356004,"David1234"); a1.studentIds.add(356004); a1.studentClass.add(2); a1.studentMissedDays.add(7.0);a1.studentUnexcused.add(3);a1.studentExcused.add(4);
+        a1.studentAccounts.put(356005,"Michael1234"); a1.studentIds.add(356005); a1.studentClass.add(3); a1.studentMissedDays.add(30.0);a1.studentUnexcused.add(3);a1.studentExcused.add(27);
+        a1.studentAccounts.put(356006,"David1234"); a1.studentIds.add(356006); a1.studentClass.add(2); a1.studentMissedDays.add(0.0);a1.studentUnexcused.add(0);a1.studentExcused.add(0);
+        a1.studentAccounts.put(356007,"Shawan1234"); a1.studentIds.add(356007); a1.studentClass.add(3); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
+        a1.studentAccounts.put(356016,"David1234"); a1.studentIds.add(356016); a1.studentClass.add(1); a1.studentMissedDays.add(4.0);a1.studentUnexcused.add(0);a1.studentExcused.add(4);
+        a1.studentAccounts.put(356008,"Shawan1234"); a1.studentIds.add(356008); a1.studentClass.add(2); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
+        a1.studentAccounts.put(356009,"David1234"); a1.studentIds.add(356009); a1.studentClass.add(3); a1.studentMissedDays.add(7.0);a1.studentUnexcused.add(3);a1.studentExcused.add(4);
+        a1.studentAccounts.put(356010,"Shawan1234"); a1.studentIds.add(356010); a1.studentClass.add(1); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
+        a1.studentAccounts.put(356011,"David1234"); a1.studentIds.add(356011); a1.studentClass.add(2); a1.studentMissedDays.add(7.0);a1.studentUnexcused.add(3);a1.studentExcused.add(4);
+        a1.studentAccounts.put(356012,"Shawan1234"); a1.studentIds.add(356012); a1.studentClass.add(3); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
+        a1.studentAccounts.put(356013,"David1234"); a1.studentIds.add(356013); a1.studentClass.add(1); a1.studentMissedDays.add(10.0);a1.studentUnexcused.add(3);a1.studentExcused.add(7);
+        a1.studentAccounts.put(356014,"David1234"); a1.studentIds.add(356014); a1.studentClass.add(2); a1.studentMissedDays.add(7.0);a1.studentUnexcused.add(3);a1.studentExcused.add(4);
+        a1.studentAccounts.put(356015,"Shawan1234"); a1.studentIds.add(356015); a1.studentClass.add(3); a1.studentMissedDays.add(9.0);a1.studentUnexcused.add(3);a1.studentExcused.add(6);
 
         ASCIIArtGenerator artGen = new ASCIIArtGenerator();
         try {
-            artGen.printTextArt("Welcome to Attendance system!",ASCIIArtGenerator.ART_SIZE_MEDIUM);
+            artGen.printTextArt("Welcome to the Attendance system!",ASCIIArtGenerator.ART_SIZE_SMALL);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        System.out.println(a1.studentIds);
         try {
             a1.start();
         }catch (InputMismatchException e){
-            System.out.println("Invalid input");
+            System.out.println("Invalid input.");
+            a1.start();
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("ID not found");
+            a1.start();
         }
 
 
         try {
-            artGen.printTextArt("Thank you! Goodbye!",ASCIIArtGenerator.ART_SIZE_MEDIUM);
+            artGen.printTextArt("Thank you! Goodbye!",ASCIIArtGenerator.ART_SIZE_SMALL);
         } catch (Exception e) {
             e.printStackTrace();
         }
