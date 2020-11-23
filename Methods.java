@@ -10,9 +10,9 @@ public class Methods {
     public static HashMap<Integer,String> studentNotifications = new HashMap<>(); // variable to store notifications from students.
     public static HashMap<Integer,String> teacherNotifications = new HashMap<>(); // variable to store notifications from teachers.
     public static int ID; // variable used to connect various methods
-    Scanner scanInt = new Scanner(System.in);
-    Scanner scanString = new Scanner(System.in);
-    public static int count = 356781;
+    Scanner scanInt = new Scanner(System.in); //Scanner for numbers
+    Scanner scanString = new Scanner(System.in); // Scanners for words
+    public static int count = 356781; // ID generator
     public static HashMap<Integer,String> studentAccounts = new HashMap<>(); // variable that stores Login and password for students
     public static HashMap<Integer,String> teacherAccounts = new HashMap<>(); // variable that stores Login and password for teachers
     public static HashMap<Integer,String> admin = new HashMap<>(); // variable that stores Login and password for Admin/Admins
@@ -37,7 +37,7 @@ public class Methods {
 
 
 
-    public  int searchStudent() {
+    public  int searchStudent() { //Alex
 
         int index = -1;
         for (int i=0;i<studentIds.size();i++){
@@ -48,7 +48,7 @@ public class Methods {
         }
         return index;
     }
-    public  int searchTeacher() {
+    public  int searchTeacher() { //Alex
 
         int index = -1;
         for (int i=0;i<teacherId.size();i++){
@@ -69,10 +69,10 @@ public class Methods {
             start();
         }
 
-    }
+    } //Alex
 
 
-    public void viewAttendance(){
+    public void viewAttendance(){ //Mohiuddin
         System.out.println(
                 "\n Present days " + (180 - studentMissedDays.get(searchStudent())) +
                 "\n Missed days " + studentMissedDays.get(searchStudent()) +
@@ -84,7 +84,7 @@ public class Methods {
             studentMenu();
         }
     }
-    public void notifyTeacher (){
+    public void notifyTeacher (){ //Mohiuddin
         System.out.println("Please enter the message to the teacher and number of days you are planning to miss.");
         String message = scanString.nextLine();
         studentNotifications.put(ID,message);
@@ -95,7 +95,7 @@ public class Methods {
             studentMenu();
     }
 
-    public void defineClassSize (){
+    public void defineClassSize (){ //Balzhima
         System.out.println("Please define number of students in your class");
         int num = scanInt.nextInt();
         if (num>0 && num<10) {
@@ -110,7 +110,7 @@ public class Methods {
             teacherMenu();
     }
 
-    public void removeStudentT (){
+    public void removeStudentT (){ //Balzhima
         int teacherID = ID;
         int indexT = searchTeacher();
         System.out.println("Please enter student ID");
@@ -130,7 +130,7 @@ public class Methods {
             teacherMenu();
     }
 
-    public void markStudentAttendance(){
+    public void markStudentAttendance(){ //Balzhima
         int teacherID = ID;
         int indexT = searchTeacher();
         System.out.println("Please enter student ID");
@@ -161,7 +161,7 @@ public class Methods {
         if (answer.equalsIgnoreCase("yes"))
             teacherMenu();
     }
-    public void takeAttendanceT (){
+    public void takeAttendanceT (){ //Shawan
         System.out.println("Are you planning to work today?");
         String answer = scanString.nextLine();
         if (answer.equalsIgnoreCase("no")){
@@ -175,7 +175,7 @@ public class Methods {
         if (answer1.equalsIgnoreCase("yes"))
             teacherMenu();
     }
-    public void notifyAdmin (){
+    public void notifyAdmin (){ //Shawan
         System.out.println("Please enter the message to the Admin and number of days you are planning to miss.");
         String message = scanString.nextLine();
         teacherNotifications.put(ID,message);
@@ -187,7 +187,7 @@ public class Methods {
     }
 
 
-    public void start (){
+    public void start (){ //Alex
 
         for(int i=0; i<4; i++) {
             System.out.println("Please enter your ID");
@@ -197,21 +197,21 @@ public class Methods {
 
             if (studentAccounts.containsKey(typeID) && studentAccounts.get(typeID).equals(typePassword)) {
                 ID = typeID;
-                if (studentMissedDays.get(searchStudent())>20){
-                    System.out.println("ATTENTION! You missed too many classes, please speak to your teacher");
+                if (studentMissedDays.get(searchStudent())>20){ //Mohiuddin
+                    System.out.println("ATTENTION! You missed too many classes, please speak to your teacher"); //Mohiuddin
                 }
                 studentMenu();
                 break;
             }else if (teacherAccounts.containsKey(typeID) && teacherAccounts.get(typeID).equals(typePassword)) {
-                if(!studentNotifications.isEmpty()) {
-                    System.out.println("!You have notifications from the students" +
-                            "\n" + studentNotifications);
-                    studentNotifications.clear();
+                if(!studentNotifications.isEmpty()) { //Shawan
+                    System.out.println("!You have notifications from the students" + //Shawan
+                            "\n" + studentNotifications); //Shawan
+                    studentNotifications.clear(); //Shawan
                 }
                 ID = typeID;
-                if (teacherMissedDays.get(searchTeacher())>20){
-                    System.out.println("ATTENTION! You missed too many classes, please speak to your Supervisor");
-                }
+                if (teacherMissedDays.get(searchTeacher())>20){ //Shawan
+                    System.out.println("ATTENTION! You missed too many classes, please speak to your Supervisor"); //Shawan
+                } //Shawan
                 teacherMenu();
                 break;
             }else if (admin.containsKey(typeID) && admin.get(typeID).equals(typePassword)) {
@@ -229,7 +229,7 @@ public class Methods {
         }
     }
 
-    public  void studentMenu () {
+    public  void studentMenu () { //Alex
         System.out.println("Welcome Student " + ID);
 
         System.out.println("Please choose option from menu below" +
@@ -240,7 +240,7 @@ public class Methods {
         initiateStudent();
 
     }
-    public  void teacherMenu () {
+    public  void teacherMenu () { //Alex
         System.out.println("Welcome teacher " + ID);
 
         System.out.println("Please choose option from menu below" +
@@ -252,7 +252,7 @@ public class Methods {
                 "\n" + "6." + "Log out");
         initiateTeacher();
     }
-    public  void adminMenu () {
+    public  void adminMenu () { //Alex
         System.out.println("Welcome Master");
 
         System.out.println("Please choose option from menu below" +
@@ -270,7 +270,7 @@ public class Methods {
 
     }
 
-    public  void initiateAdmin (){
+    public  void initiateAdmin (){ //Alex
         String menuChoice = "";
         menuChoice = scanString.nextLine();
         switch (menuChoice){
@@ -307,7 +307,7 @@ public class Methods {
         }
     }
 
-    public  void initiateStudent (){
+    public  void initiateStudent (){ //Alex
         String menuChoice = "";
         menuChoice = scanString.nextLine();
         switch (menuChoice){
@@ -325,7 +325,7 @@ public class Methods {
 
     }
 
-    public  void initiateTeacher (){
+    public  void initiateTeacher (){ //Alex
         String menuChoice = "";
         menuChoice = scanString.nextLine();
         switch (menuChoice){
@@ -351,7 +351,7 @@ public class Methods {
 
     }
 
-    public  void addStudents (){
+    public  void addStudents (){ //Alex
         int login =count++;
         System.out.println("Please create a password for a new student with login " + login);
         String password = scanString.nextLine();
@@ -363,7 +363,7 @@ public class Methods {
 
             adminMenu();
     }
-    public  void studentTransfer (){
+    public  void studentTransfer (){ //Alex
         System.out.println("Please enter ID of the student you want to transfer");
         ID = scanInt.nextInt();
         System.out.println("Please enter new class for the student");
@@ -375,7 +375,7 @@ public class Methods {
         if (answer.equalsIgnoreCase("yes")) {
             adminMenu(); }
     }
-    public  void removeStudent(){
+    public  void removeStudent(){ //Alex
         System.out.println("Please enter ID of the student you want to remove from the system.");
         ID = scanInt.nextInt();
         int index = searchStudent();
@@ -391,7 +391,7 @@ public class Methods {
         if (answer.equalsIgnoreCase("yes")) {
             adminMenu(); }
     }
-    public  void addTeacher (){
+    public  void addTeacher (){ //David
         int login =count++;
         System.out.println("Please create a password for a new teacher with login " + login);
         String password = scanString.nextLine();
@@ -405,7 +405,7 @@ public class Methods {
             adminMenu(); }
 
     }
-    public  void removeTeacher(){
+    public  void removeTeacher(){ //David
         System.out.println("Please enter ID of the teacher you want to remove from the system.");
         ID = scanInt.nextInt();
         int index = searchTeacher();
@@ -421,7 +421,7 @@ public class Methods {
         if (answer.equalsIgnoreCase("yes")) {
             adminMenu(); }
     }
-    public  void teacherInd() {
+    public  void teacherInd() { //David
         System.out.println("Enter teacher's ID");
         int typeID = scanInt.nextInt();
         ID = typeID;
@@ -435,7 +435,7 @@ public class Methods {
             adminMenu();
         }
     }
-    public  void studentInd () {
+    public  void studentInd () { //David
         System.out.println("Enter student's ID");
         int typeID = scanInt.nextInt();
         ID = typeID;
@@ -451,7 +451,7 @@ public class Methods {
         }
     }
 
-    public  Double classAttendance (){
+    public  Double classAttendance (){ //David
         ArrayList<Double> classMissedDays = new ArrayList();
         System.out.println("Which class would you like to view attendance on? ");
         int classObject = scanInt.nextInt();
@@ -474,7 +474,7 @@ public class Methods {
             adminMenu(); }
         return sum;
     }
-    public  Double teacherAttendance (){
+    public  Double teacherAttendance (){ //David
 
         double sum = 0;
         for (int i = 0 ; i < teacherMissedDays.size() ; i++){
